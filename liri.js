@@ -155,8 +155,28 @@ const runSongSearchApp = (inputArgument) => {
   )
 }
 
-const runRandomApp = () => {
-	fs.readFile("random.txt", "utf8", (err,data) => {
+const randomSong = () => {
+	fs.readFile("random-song.txt", "utf8", (err,data) => {
+		if(err){
+			return console.log(err);
+		}
+		let dataArray = data.split(",");
+		userInputs(dataArray[0], dataArray[1]);
+	})
+}
+
+const randomMovie = () => {
+	fs.readFile("random-movie.txt", "utf8", (err,data) => {
+		if(err){
+			return console.log(err);
+		}
+		let dataArray = data.split(",");
+		userInputs(dataArray[0], dataArray[1]);
+	})
+}
+
+const randomConcert = () => {
+	fs.readFile("random-concert.txt", "utf8", (err,data) => {
 		if(err){
 			return console.log(err);
 		}
@@ -176,9 +196,15 @@ const userInputs = (inputFunction, inputArgument) => {
 		case "movie-this":
 			runMovieSearchApp(inputArgument);
 			break;
-		case "do-what-it-says":
-			runRandomApp();
+		case "random-song":
+			randomSong();
 			break;
+		case "random-movie":
+			randomMovie();
+			break;
+		case "random-concert":
+			randomConcert();
+			break;	
 		default:
 			console.log("Not a recognized command. Please consult the readme for list of valid commands.")				
 	}
