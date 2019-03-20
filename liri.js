@@ -42,6 +42,10 @@ const runConcertSearchApp = (inputArgument) => {
 	axios.get(queryUrl)
 	.then(
 		(response) => {
+			if (response.data = '\n{warn=Not found}\n') {
+				console.log("No results found. Please try again");
+				return;
+			}
 			for (let i = 0; i < response.data.length; i++){
 			console.log(divider);
 			// console.log("---RESULT #: " + (i+1) + " ---")
@@ -83,6 +87,10 @@ const runMovieSearchApp = (inputArgument) => {
 		axios.get(queryUrl)
 		.then(
 			(response) => {
+			if (response.data.Response = 'False') {
+				console.log ("No results found. Please try again.");
+				return;
+			}
 			let responseData = [
 			"Title of the movie: " + response.data.Title,
 			"Year of Release: " + response.data.Year,
@@ -131,6 +139,10 @@ const runSongSearchApp = (inputArgument) => {
  			return;
  		}
  	let results = data.tracks.items;
+ 	if (results = []) {
+ 		console.log("No results found. Please try again.");
+ 		return;
+ 	}
  	console.log("---SONG INFO---");
  	for (let i = 0; i < results.length; i++){
  	 console.log(divider);
@@ -190,7 +202,7 @@ const userInputs = (inputFunction, inputArgument) => {
 		case "concert-this":
 			runConcertSearchApp(inputArgument);
 			break;
-		case "spotify-this-song":
+		case "spotify-this":
 			runSongSearchApp(inputArgument);
 			break;
 		case "movie-this":
