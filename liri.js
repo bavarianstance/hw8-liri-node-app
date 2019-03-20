@@ -42,10 +42,10 @@ const runConcertSearchApp = (inputArgument) => {
 	axios.get(queryUrl)
 	.then(
 		(response) => {
-			if (response.data = '\n{warn=Not found}\n') {
-				console.log("No results found. Please try again");
-				return;
-			}
+			// if (response.data.errorMessage === '\n{warn=Not found}\n') {
+			// 	console.log("No results found. Please try again");
+			// 	return;
+			// }
 			for (let i = 0; i < response.data.length; i++){
 			console.log(divider);
 			// console.log("---RESULT #: " + (i+1) + " ---")
@@ -87,7 +87,7 @@ const runMovieSearchApp = (inputArgument) => {
 		axios.get(queryUrl)
 		.then(
 			(response) => {
-			if (response.data.Response = 'False') {
+			if (response.data.Response === 'False') {
 				console.log ("No results found. Please try again.");
 				return;
 			}
@@ -139,10 +139,10 @@ const runSongSearchApp = (inputArgument) => {
  			return;
  		}
  	let results = data.tracks.items;
- 	if (results = []) {
- 		console.log("No results found. Please try again.");
- 		return;
- 	}
+ 	// if (results === []) {
+ 	// 	console.log("No results found. Please try again.");
+ 	// 	return;
+ 	// }
  	console.log("---SONG INFO---");
  	for (let i = 0; i < results.length; i++){
  	 console.log(divider);
