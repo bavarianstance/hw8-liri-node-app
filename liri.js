@@ -42,12 +42,14 @@ const runConcertSearchApp = (inputArgument) => {
 	axios.get(queryUrl)
 	.then(
 		(response) => {
-			// if (response.data.errorMessage === '\n{warn=Not found}\n') {
+			// deprecated code for edge case
+			// if (response.data === undefined ) {
 			// 	console.log("No results found. Please try again");
 			// 	return;
 			// }
 			for (let i = 0; i < response.data.length; i++){
 			console.log(divider);
+			//deprecated code / refactored
 			// console.log("---RESULT #: " + (i+1) + " ---")
  		// 	console.log("Name of venue: " + response.data[i].venue.name);
 			// console.log("Location of venue: " + response.data[i].venue.city);
@@ -66,7 +68,7 @@ const runConcertSearchApp = (inputArgument) => {
 			});
 		}
 		}).catch((error) => {
-    	 console.log(error);
+    	 console.log("Error. No results found. Please try again.");
   });
 }
 
@@ -101,6 +103,7 @@ const runMovieSearchApp = (inputArgument) => {
 			"Top Billed Cast: " + response.data.Actors
 			].join("\n\n");
 			console.log(responseData);
+			//deprecated code / refactored
 			// console.log("Title of the movie: " + response.data.Title);
 			// console.log("Year of Release: " + response.data.Year);
 			// console.log("IMDB Rating :" + response.data.imdbRating);
@@ -138,11 +141,12 @@ const runSongSearchApp = (inputArgument) => {
  			console.log(err);
  			return;
  		}
+
+ 	if (data.tracks.total  === 0) {
+ 		console.log("No results found. Please try again.");
+ 		return;
+ 	}
  	let results = data.tracks.items;
- 	// if (results === []) {
- 	// 	console.log("No results found. Please try again.");
- 	// 	return;
- 	// }
  	console.log("---SONG INFO---");
  	for (let i = 0; i < results.length; i++){
  	 console.log(divider);
@@ -157,6 +161,7 @@ const runSongSearchApp = (inputArgument) => {
  	 fs.appendFile("log.txt", responseData + divider, (err) => {
 				if (err) throw err;
 	 });
+	 //deprecated code / refactored
  	 // console.log("---RESULT #: " + (i+1) + " ---");
    //   console.log("Artist/Band: " + results[i].artists[0].name); 
    //   console.log("Song name: " + results[i].name);
