@@ -18,11 +18,11 @@
 * random-[input] --> searches via random-[input].txt for random [input] to display. Valid inputs include song, movie or concert. 
 
 ### Technologies Used
-* Node.JS (w/ below extensions)
-** dotenv
-** figlet
-** axios
-** moment
+* Node.JS 
+* dotenv
+* figlet
+* axios
+* moment
 * Javascript ES6
 * Spotify API
 * BandsinTown API
