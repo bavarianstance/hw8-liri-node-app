@@ -8,6 +8,7 @@
 ### Usage
 * node liri.js [command] [search term(s)]
 * ie: --> node liri.js concert-this red hot chili peppers
+* all valid result responses from APIs are logged to log.txt
 
 ### Commands
 * concert-this --> searches BandsinTown for upcoming concerts. Accepts search value(s) by Artist/Band name.
