@@ -1,3 +1,4 @@
+//inporting dotenv package
 require("dotenv").config();
 
 //global variables
@@ -10,11 +11,12 @@ const Spotify = require("node-spotify-api");
 const spotify = new Spotify(keys.spotify);
 const divider = "\n------------------------------------------------------------\n\n";
 
-//capture user inputs
+//capture user inputs into variables
 let inputFunction = process.argv[2];
 let nodeArgs = process.argv
 let inputArgument = "";
 
+//for loop for multi user inputs
 for (let i = 3; i < nodeArgs.length; i++) {
 
   if (i > 3 && i < nodeArgs.length) {
@@ -25,8 +27,9 @@ for (let i = 3; i < nodeArgs.length; i++) {
   }
 }
 
+//concert search function
 const runConcertSearchApp = (inputArgument) => {
-
+//figlet module for ascii text generation
 	figlet('Concert This!', (err, data) => {
     if (err) {
         console.log('Something went wrong...');
@@ -35,6 +38,7 @@ const runConcertSearchApp = (inputArgument) => {
     }
     console.log(data)
 });
+		//set default search value for no user input
 		if (inputArgument === "") {
 			inputArgument = "Red Hot Chili Peppers";
 		}
@@ -63,15 +67,18 @@ const runConcertSearchApp = (inputArgument) => {
 			"Artist Lineup: " + response.data[i].lineup
 			].join("\n\n");
 			console.log(responseData);
+			//logging response
 			fs.appendFile("log.txt", responseData + divider, (err) => {
 				if (err) throw err;
 			});
 		}
+		//edge case for error/invalid search term
 		}).catch((error) => {
     	 console.log("Error. No results found. Please try again.");
   });
 }
 
+//movie search function
 const runMovieSearchApp = (inputArgument) => {
 
 	figlet('Movie This!', (err, data) => {
@@ -81,7 +88,8 @@ const runMovieSearchApp = (inputArgument) => {
         return;
     }
     console.log(data)
-});
+});	
+		//default search value
 		if (inputArgument === "") {
 			inputArgument = "Mr. Nobody";
 		}
@@ -89,6 +97,7 @@ const runMovieSearchApp = (inputArgument) => {
 		axios.get(queryUrl)
 		.then(
 			(response) => {
+				//edge case for no results
 			if (response.data.Response === 'False') {
 				console.log ("No results found. Please try again.");
 				return;
@@ -111,6 +120,8 @@ const runMovieSearchApp = (inputArgument) => {
 			// console.log("Original Filmed Language: " + response.data.Language);
 			// console.log("Sypnosis: " + response.data.Plot);
 			// console.log("Top Billed Cast: " + response.data.Actors);		
+
+			//logging response
 			fs.appendFile("log.txt", responseData + divider, (err) => {
 				if (err) throw err;
 			});
@@ -119,6 +130,7 @@ const runMovieSearchApp = (inputArgument) => {
 		});
 }
 
+//song search function
 const runSongSearchApp = (inputArgument) => {
 	figlet('Spotify This!', (err, data) => {
     if (err) {
@@ -128,6 +140,7 @@ const runSongSearchApp = (inputArgument) => {
     }
     console.log(data)
 });
+	//default search value
 	if (inputArgument === ""){
 		inputArgument = "The Sign Ace of Base";
  	}
@@ -141,7 +154,7 @@ const runSongSearchApp = (inputArgument) => {
  			console.log(err);
  			return;
  		}
-
+ 		//edge case for no results
  	if (data.tracks.total  === 0) {
  		console.log("No results found. Please try again.");
  		return;
@@ -158,6 +171,7 @@ const runSongSearchApp = (inputArgument) => {
  	 "Album name: " + results[i].album.name
  	 ].join("\n\n");
  	 console.log(responseData);
+ 	 //logging
  	 fs.appendFile("log.txt", responseData + divider, (err) => {
 				if (err) throw err;
 	 });
@@ -172,6 +186,7 @@ const runSongSearchApp = (inputArgument) => {
   )
 }
 
+//random functions
 const randomSong = () => {
 	fs.readFile("random-song.txt", "utf8", (err,data) => {
 		if(err){
@@ -202,6 +217,7 @@ const randomConcert = () => {
 	})
 }
 
+//user input choices
 const userInputs = (inputFunction, inputArgument) => {
 	switch (inputFunction) {
 		case "concert-this":
@@ -226,7 +242,7 @@ const userInputs = (inputFunction, inputArgument) => {
 			console.log("Not a recognized command. Please consult the readme for list of valid commands.")				
 	}
 }
-
+//running function
 userInputs(inputFunction,inputArgument);
 
 
