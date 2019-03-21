@@ -33,3 +33,9 @@
 * BandsinTown API
 * OMDB API
 
+### Comments
+* Added edge cases for no result(s) error(s)
+* figlet utilized for ASCII art generation
+* axios used for backend API calls
+* moment used for reformatting datetime info
+* dotenv leveraged for obfuscating private keys for Spotify API
